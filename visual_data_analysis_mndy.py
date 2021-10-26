@@ -68,3 +68,15 @@ credit_cards_df = pd.read_sql(query, engine)
 print(credit_cards_df)
 
 #%%
+
+# look at merchant-category data
+# Write the SQL query
+query = "SELECT * FROM merchant_cat"
+
+# Read the SQL query into a DataFrame
+merchant_cat_df = pd.read_sql(query, engine)
+
+# Show the DataFrame's head
+print(merchant_cat_df)
+
+#%%
