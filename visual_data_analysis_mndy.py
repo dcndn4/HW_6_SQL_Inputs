@@ -45,7 +45,7 @@ engine = create_engine(db_url)
 
 #%%
 
-# look at data
+# look at card-holder data
 # Write the SQL query
 query = "SELECT * FROM card_holder"
 
@@ -54,5 +54,17 @@ card_holder_df = pd.read_sql(query, engine)
 
 # Show the DataFrame's head
 print(card_holder_df)
+
+#%%
+
+# look at credit card data
+# Write the SQL query
+query = "SELECT * FROM credit_cards"
+
+# Read the SQL query into a DataFrame
+credit_cards_df = pd.read_sql(query, engine)
+
+# Show the DataFrame's head
+print(credit_cards_df)
 
 #%%
