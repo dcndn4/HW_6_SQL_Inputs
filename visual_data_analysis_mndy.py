@@ -80,3 +80,25 @@ merchant_cat_df = pd.read_sql(query, engine)
 print(merchant_cat_df)
 
 #%%
+
+# look at merchants data
+# Write the SQL query
+query = "SELECT * FROM merchants"
+
+# Read the SQL query into a DataFrame
+merchants_df = pd.read_sql(query, engine)
+
+# Show the DataFrame's head
+print(merchants_df)
+
+#%%
+
+# look at transactions data
+# Write the SQL query
+query = "SELECT * FROM transactions"
+
+# Read the SQL query into a DataFrame
+transactions = pd.read_sql(query, engine)
+
+# Show the DataFrame's head
+print(transactions)
