@@ -102,3 +102,89 @@ transactions = pd.read_sql(query, engine)
 
 # Show the DataFrame's head
 print(transactions)
+
+#%%
+
+# look at transactions data
+# Write the SQL query
+query = "SELECT * FROM full_transactions"
+
+# Read the SQL query into a DataFrame
+full_transactions = pd.read_sql(query, engine)
+
+# Show the DataFrame's head
+print(full_transactions)
+
+#%%
+
+# Data Analysis Question 1
+
+# The two most important customers of the firm may have been hacked. 
+# Verify if there are any fraudulent transactions in their history. 
+# For privacy reasons, you only know that their cardholder IDs are 2 and 18.
+
+# Using hvPlot, create a line plot representing the time series of 
+# transactions over the course of the year for each cardholder separately.
+
+# Next, to better compare their patterns, create a single line plot 
+# that containins both card holders' trend data.
+
+# What difference do you observe between the consumption patterns? 
+# Does the difference suggest a fraudulent transaction? 
+# Explain your rationale in the markdown report.
+
+
+#%%
+
+# look at transactions data
+# Write the SQL query
+query = "SELECT * FROM suspected"
+
+# Read the SQL query into a DataFrame
+suspect_transactions = pd.read_sql(query, engine)
+
+# Show the DataFrame's head
+print(suspect_transactions)
+#%%
+
+query = "SELECT * FROM suspected_2"
+
+# Read the SQL query into a DataFrame
+suspect_2 = pd.read_sql(query, engine)
+
+#%%
+
+
+query = "SELECT * FROM suspected_18"
+
+# Read the SQL query into a DataFrame
+suspect_18 = pd.read_sql(query, engine)
+
+#%%
+
+# df_costs_year_sorted=avg_prices_nhbrhood.sort_values(['year','sale_price_sqr_foot'], ascending=False)
+# new_df = sfo_data.set_index(['year', 'neighborhood'])
+
+
+summary_suspect_transactions=suspect_transactions[['ccd_owner_id', 'datetime', 'amount']]
+
+summary_suspect_2=suspect_2[['datetime', 'amount']]
+summary_suspect_2=summary_suspect_2.sort_values(['datetime'])
+
+summary_suspect_18=suspect_18[['datetime', 'amount']]
+summary_suspect_18=summary_suspect_18.sort_values(['datetime'])
+
+#%%
+
+# avg_price_sqr_ft = mean_housing_units_year_all["sale_price_sqr_foot"]
+# df_expensive_neighborhoods_per_year = df_costs_year_sorted[df_costs_year_sorted["Neighborhood"].isin(df_expensive_neighborhoods["neighborhood"])]
+
+# sort by date
+# summary_suspect_transactions=summary_suspect_transactions.sort_values(['datetime'])
+
+#%%
+
+# select out # 2 transactions only
+# suspect_2=suspect_transactions[suspect_transactions['ccd_owner_id']=(2)]
+
+

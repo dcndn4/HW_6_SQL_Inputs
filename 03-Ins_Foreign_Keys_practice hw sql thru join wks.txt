@@ -1,0 +1,160 @@
+-- 03-Ins_Foreign_Keys
+-- 10:35 AM
+-- 10:50 AM
+
+-- take note that the order of table creation can matter, when using constraints
+-- also, often when you create dbs, you do not create PKs, FKs. It is a high standard to follow, but there can be time constraints.
+
+DROP TABLE IF EXISTS customer CASCADE;
+DROP TABLE IF EXISTS customer_email CASCADE;
+DROP TABLE IF EXISTS customer_phone CASCADE;
+DROP TABLE IF EXISTS exercise_cc CASCADE;
+
+-- 1. Create a Customer table
+-- serial autopopulates with incremental value, for every new entry
+CREATE TABLE customer (
+    customer_id SERIAL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    PRIMARY KEY (customer_id)
+);
+
+-- 2. Create Customer Email table
+-- here, we define a relationship to table customer.
+CREATE TABLE customer_email (
+    email_id SERIAL,
+    customer_id INTEGER NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    PRIMARY KEY (email_id),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)  -- right here
+);
+
+-- Let's create a third table with a foreign key that references the first table
+CREATE TABLE customer_phone (
+    customer_phone_id SERIAL,
+    phone VARCHAR(30) NOT NULL,
+    customer_id INTEGER NOT NULL,
+    PRIMARY KEY (customer_phone_id),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)  -- right here
+);
+
+--- New table to practice using non-pk fields elsewhere (maybe with a foreign key that references the first table)
+CREATE TABLE exercise_cc (
+    cc_nbr VARCHAR(30) NOT NULL,
+    cc_owner_id VARCHAR(2) NOT NULL,
+    PRIMARY KEY (cc_nbr)
+    ---FOREIGN KEY (customer_id) REFERENCES customer(customer_id)  -- right here
+);
+
+    cc_table_id SERIAL,
+
+-- New table to practice accessing other non-pk fields (maybe with a foreign key that references the first table)
+CREATE TABLE exercise_trans (
+    trans_id integer NOT null,
+	datetime date, 
+    amount float NOT NULL,
+    cc_nbr varchar(20) NOT NULL,
+	merch_id integer,
+    PRIMARY KEY (trans_id),
+    FOREIGN KEY (cc_nbr) REFERENCES exercise_cc(cc_nbr) 
+);
+
+INSERT INTO exercise_cc VALUES
+    (3517111172421930, 1),
+    (4761049645711555811, 1),
+    (4866761290278198714, 2);
+	
+SELECT * FROM exercise_cc;
+
+INSERT INTO exercise_trans VALUES
+    (222, '2018-01-01 21:35:10', 6.22, 3561954487988605, 69),
+    (2045, '2018-01-01 21:43:12', 3.83, 5135837688671496, 85),
+    (395, '2018-01-01 22:41:21', 9.61, 213193946980303, 82),
+    (3309, '2018-01-01 23:13:30', 19.03, 4263694062533017, 5);
+	
+SELECT * FROM exercise_trans;
+
+-- My Join Tables attempt
+SELECT exercise_trans.trans_id, exercise_trans.datetime, exercise_trans.amount, exercise_trans.cc_nbr, cc.cc_owner_id
+FROM exercise_trans 
+JOIN exercise_cc AS cc
+  ON exercise_trans.cc_nbr = cc.cc_nbr;
+  
+
+-- Join Tables example from lower down in document, to compare
+SELECT customer.first_name, customer.last_name, email.email, phone.phone
+FROM customer 
+JOIN customer_email AS email
+  ON customer.customer_id = email.customer_id
+JOIN customer_phone AS phone
+  ON email.customer_id = phone.customer_id;
+
+
+  
+  
+  
+  
+  
+
+-- Populate that table
+INSERT INTO customer (first_name, last_name)
+VALUES
+  ('Bob', 'Smith'),
+  ('Jane', 'Davidson'),
+  ('Jimmy', 'Bell'),
+  ('Stephanie', 'Duke');
+
+-- Populate that table
+INSERT INTO customer_email (customer_id, email)
+VALUES
+  (1, 'bobsmith@email.com'),
+  (2, 'jdavids@email.com'),
+  (3, 'jimmyb@email.com'),
+  (4, 'sd@email.com');
+
+-- Populate that table
+INSERT INTO customer_phone (customer_id, phone)
+VALUES
+  (1, '435-344-2245'),
+  (2, '332-776-4678'),
+  (3, '221-634-7753'),
+  (4, '445-663-5799');
+
+-- View our tables
+SELECT * FROM customer;
+SELECT * FROM customer_email;
+SELECT * FROM customer_phone;
+
+-- Attempt to insert a value with no foreign key for referential integrity
+INSERT INTO customer_email
+  (email, customer_id)
+VALUES
+  ('lucystern@gmail.com', 5);
+-- throws an error bc customer id would need to be changed in the other table as well
+-- customer_id is an FK that takes a value from another table.
+-- But, customer_id = 5 doesn't appear in the other table, so it can't be referenced.
+
+-- fix
+INSERT INTO customer
+	(first_name, last_name)
+VALUES
+	('Lucy', 'Stern');
+	
+-- try again
+INSERT INTO customer_email
+  (email, customer_id)
+VALUES
+  ('lucystern@gmail.com', 5);
+
+-- Join Tables
+SELECT customer.first_name, customer.last_name, email.email, phone.phone
+FROM customer 
+JOIN customer_email AS email
+  ON customer.customer_id = email.customer_id
+JOIN customer_phone AS phone
+  ON email.customer_id = phone.customer_id;
+  
+-- what might be some other PK-FK relationships?
+
+
+-- states and countries!

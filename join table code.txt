@@ -1,0 +1,80 @@
+Process of creating first join table
+
+-- Create a junction table.
+CREATE TABLE credit_card_transaction_junction (
+  ccd_id INT NOT NULL,  -- create credit card id
+  FOREIGN KEY (ccd_id) REFERENCES credit_card(ccd_id),  -- id it as coming from credit_cards table
+  transaction_id_nbr INTEGER NOT NULL,  -- create transaction_number id
+  FOREIGN KEY (transaction_id_nbr) REFERENCES transactions(transaction_id_nbr),  -- id it as coming from transactions table
+  PRIMARY KEY (ccd_id, transaction_id_nbr)   -- id both as primary in this table
+);
+
+
+-- Create a junction table.
+CREATE TABLE agent_region_junction (
+  agent_id INT NOT NULL,  -- create agent id
+  FOREIGN KEY (agent_id) REFERENCES agents(agent_id),  -- id it as coming from agents table
+  region_id INTEGER NOT NULL,  -- create region id
+  FOREIGN KEY (region_id) REFERENCES regions(region_id),  - id it as coming from region table
+  PRIMARY KEY (agent_id, region_id)   - id both as primary in this table
+);
+
+INSERT INTO credit_card ("ccd_id", "ccd_nbr")
+VALUES
+  ('1', '111111111');
+  
+INSERT INTO credit_card ("ccd_id", "ccd_nbr")
+VALUES
+	('1', 3517110000000000)
+	,('1',	4761050000000000000)
+	,('2',	4866760000000000000)
+	,('2',	675911000000)
+	,('3',	30078300000000)
+	,('4',	4263690000000000)
+	,('4',	584227000000)
+	,('5',	4276470000000)
+	,('5',	4268490000000000)
+	,('6',	3581350000000000)
+	,('6',	4159840000000000000)
+	,('7',	3516950000000000)
+	,('7',	4539990000000000)
+	,('8',	4834480000000000)
+	,('8',	30063300000000)
+	,('9',	30182000000000)
+	,('10',	4962920000000000000)
+	,('10',	4165310000000000000)
+	,('10',	213194000000000)
+	,('11',	180099000000000)
+	,('11',	4644010000000000000)
+	,('11',	4027910000000000)
+	,('12',	501880000000)
+	,('12',	5297190000000000)
+	,('12',	376028000000000)
+	,('13',	4711770000000000)
+	,('13',	5135840000000000)
+	,('13',	3561950000000000)
+	,('14',	5175950000000000)
+	,('15',	4723780000000000000)
+	,('15',	6500240000000000)
+	,('16',	503843000000)
+	,('16',	5570600000000000)
+	,('16',	5500710000000000)
+	,('17',	6011990000000000)
+	,('18',	4498000000000)
+	,('18',	344120000000000)
+	,('19',	4743200000000000000)
+	,('19',	5361780000000000)
+	,('19',	3561070000000000)
+	,('20',	3535650000000000)
+	,('20',	4506410000000000)
+	,('20',	4586960000000000000)
+	,('21',	4279100000000000000)
+	,('22',	501809000000)
+	,('23',	4741040000000)
+	,('23',	4188160000000000)
+	,('23',	4150720000000000)
+	,('24',	4681900000000)
+	,('24',	30143000000000)
+	,('24',	3582200000000000)
+	,('25',	4319650000000)
+	,('25',	372415000000000);
