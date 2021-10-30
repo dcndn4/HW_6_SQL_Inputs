@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS credit_cards CASCADE;
+DROP TABLE IF EXISTS suspected CASCADE;
+DROP TABLE IF EXISTS transactions CASCADE;
+DROP TABLE IF EXISTS full_transactions CASCADE;
+
+
+SELECT * FROM credit_card;
+SELECT * FROM card_holder;
+SELECT * FROM suspected;
+
+CREATE Table suspected_25 AS
+SELECT * from full_transactions
+where ccd_owner_id in ('25');
+
+
+SELECT * FROM suspected_25;
