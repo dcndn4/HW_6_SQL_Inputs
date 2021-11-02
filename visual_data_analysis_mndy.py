@@ -170,9 +170,20 @@ summary_suspect_transactions=suspect_transactions[['ccd_owner_id', 'datetime', '
 
 summary_suspect_2=suspect_2[['datetime', 'amount']]
 summary_suspect_2=summary_suspect_2.sort_values(['datetime'])
+summary_suspect_2=summary_suspect_2.rename(columns={'amount': 'Amount_2'})
 
 summary_suspect_18=suspect_18[['datetime', 'amount']]
 summary_suspect_18=summary_suspect_18.sort_values(['datetime'])
+
+# df_costs=df_costs.rename(columns={'neighborhood': 'Neighborhood'})
+
+summary_suspect_18=summary_suspect_18.rename(columns={'amount': 'Amount_18'})
+
+# neighbor_all =pd.merge(df_costs, map_coord_data, on= 'Neighborhood')
+
+#%%
+
+suspect_all =pd.merge(summary_suspect_2, summary_suspect_18, on='datetime') 
 
 #%%
 
@@ -186,5 +197,8 @@ summary_suspect_18=summary_suspect_18.sort_values(['datetime'])
 
 # select out # 2 transactions only
 # suspect_2=suspect_transactions[suspect_transactions['ccd_owner_id']=(2)]
+
+
+summary_suspect_2=suspect_2[['datetime', 'amount']]
 
 

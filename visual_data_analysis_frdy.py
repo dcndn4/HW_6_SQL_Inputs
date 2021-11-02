@@ -261,6 +261,82 @@ query = "SELECT * FROM suspected_25_detail"
 
 # Read the SQL query into a DataFrame
 suspect_25_detail = pd.read_sql(query, engine)
+print(suspect_25_detail.dtypes)
 
 #%%
+
+# from pyspark.sql.functions import UserDefinedFunction
+# from pyspark.sql.types import StringType
+
+#%%
+# switch floats to integers
+
+suspect_25_detail.mon = suspect_25_detail.mon.astype(int)
+suspect_25_detail.day = suspect_25_detail.day.astype(int)
+print(suspect_25_detail.dtypes)
+
+#%%
+#3
+# udf = UserDefinedFunction(lambda x: month_lst[int(x%12) - 1], StringType())
+
+# new_25_deet = suspect_25_detail.select(*[udf(mon).alias(name) if column == name else column for column in suspect_25_detail.columns])
+
+
+#%%
+
+import calendar
+
+#%%
+
+for x in range (1, 13):
+    print (x, ":", calendar.month_abbr[x], "-", calendar.month_name[x])
+
+x = 4
+
+print (x, ":", calendar.month_abbr[x], "-", calendar.month_name[x])
+
+#%%
+# def(loop)
+
+# loop = UserDefinedFunction(lambda x: month_lst[int(x%12) - 1], StringType())
+
+# new_25_deet = suspect_25_detail.select(*[udf(mon).alias(name) 
+#        if column == name 
+#        else column for column in suspect_25_detail.columns])
+
+# month_name = {January, Februrary, March, April, May, June, July, August, September, October, November, December}
+
+#%%
+
+for item in suspect_25_detail["mon"]:
+        nbr=suspect_25_detail["mon"]
+        print(nbr)
+        suspect_25_detail["mon"]=calendar.month_name[nbr]
+            
+#%%
+
+for purchase in suspect_25_detail:
+    for nbr in suspect_25_detail["mon"]:
+        print (nbr)
+        if suspect_25_detail["mon"] in month_lst:
+            break
+        else:
+            suspect_25_detail["mon"]=calendar.month_name[nbr]
+    
+        
+#%%
+    
+for purchase in suspect_25_detail:
+    for nbr in suspect_25_detail["mon"]:
+        if nbr == name: break
+else:
+        nbr = calendar.month_name[nbr]     
+        
+        
+        
+# for month_lst
+            
+            
+
+        
 
