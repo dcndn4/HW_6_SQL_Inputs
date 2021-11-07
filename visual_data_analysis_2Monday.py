@@ -288,12 +288,14 @@ import calendar
 
 #%%
 
-for x in range (1, 13):
-    print (x, ":", calendar.month_abbr[x], "-", calendar.month_name[x])
+# an interesting piece of the puzzle, but didn't fit in this time
 
-x = 4
+# for x in range (1, 13):
+#     print (x, ":", calendar.month_abbr[x], "-", calendar.month_name[x])
 
-print (x, ":", calendar.month_abbr[x], "-", calendar.month_name[x])
+# x = 4
+
+# print (x, ":", calendar.month_abbr[x], "-", calendar.month_name[x])
 
 #%%
 # def(loop)
@@ -308,35 +310,51 @@ print (x, ":", calendar.month_abbr[x], "-", calendar.month_name[x])
 
 #%%
 
-for item in suspect_25_detail["mon"]:
-        nbr=suspect_25_detail["mon"]
-        print(nbr)
-        suspect_25_detail["mon"]=calendar.month_name[nbr]
+# Month naming attempt # 1 -- to come back and fix subsequently
+
+# for item in suspect_25_detail["mon"]:
+#        nbr=suspect_25_detail["mon"]
+#        print(nbr)
+#        suspect_25_detail["mon"]=calendar.month_name[nbr]
             
 #%%
 
-for purchase in suspect_25_detail:
-    for nbr in suspect_25_detail["mon"]:
-        print (nbr)
-        if suspect_25_detail["mon"] in month_lst:
-            break
-        else:
-            suspect_25_detail["mon"]=calendar.month_name[nbr]
+# Month naming attempt # 2 -- to come back and fix subsequently
+
+# for purchase in suspect_25_detail:
+#    for nbr in suspect_25_detail["mon"]:
+#        print (nbr)
+#        if suspect_25_detail["mon"] in month_lst:
+#            break
+#        else:
+#            suspect_25_detail["mon"]=calendar.month_name[nbr]
     
         
 #%%
-    
-for purchase in suspect_25_detail:
-    for nbr in suspect_25_detail["mon"]:
-        if nbr == name: break
-else:
-        nbr = calendar.month_name[nbr]     
-        
-        
-        
-# for month_lst
+   
+# Month naming attempt # 3 -- to come back, review, and understand more clearly in the future
+ 
+# for purchase in suspect_25_detail:
+#    for nbr in suspect_25_detail["mon"]:
+#        if nbr == name: break
+# else:
+#        nbr = calendar.month_name[nbr]     
+#%%
+
+loop to change the numeric month to month names
+
+#Another possible approach
+# def my_func(x):
+#    return calendar.month_abbr[x]
+
+#%%
+
+
+
+import calendar
+suspect_25_detail['Month'] = suspect_25_detail['mon'].apply(lambda x: calendar.month_abbr[x])
             
-            
+print(suspect_25_detail)
 
         
 
