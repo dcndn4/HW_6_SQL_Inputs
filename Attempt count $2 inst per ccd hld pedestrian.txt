@@ -1,0 +1,64 @@
+DROP TABLE IF EXISTS ch_trans_low_amt CASCADE;
+
+CREATE Table full_transactions AS
+SELECT transactions.trans_id, transactions.datetime, transactions.amount, transactions.cc_nbr, cc.ccd_owner_id
+FROM transactions 
+JOIN credit_cards AS cc
+  ON transactions.cc_nbr = cc.ccd_nbr;
+
+CREATE Table ch_trans_low_amt AS
+SELECT * from full_transactions
+where amount < 2.00
+order by ccd_owner_id;
+
+Create Table ignored_quantity (
+    ccd_owner_id integer NOT NULL,
+	ign_trans_qty varchar(2) NOT Null,
+    PRIMARY KEY (ccd_owner_id),
+    FOREIGN KEY (ccd_owner_id) REFERENCES card_holder(cc_holder_id) 
+);
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_1
+FROM ch_trans_low_amt
+where ccd_owner_id = '1';
+
+INSERT INTO ignored_quantity VALUES  
+    (1, 'ignored_trans_1');
+	
+SELECT * FROM ignored_quantity;
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_2
+FROM ch_trans_low_amt
+where ccd_owner_id = '2';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_3
+FROM ch_trans_low_amt
+where ccd_owner_id = '3';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_4
+FROM ch_trans_low_amt
+where ccd_owner_id = '4';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_5
+FROM ch_trans_low_amt
+where ccd_owner_id = '5';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_6
+FROM ch_trans_low_amt
+where ccd_owner_id = '6';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_7
+FROM ch_trans_low_amt
+where ccd_owner_id = '7';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_8
+FROM ch_trans_low_amt
+where ccd_owner_id = '8';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_9
+FROM ch_trans_low_amt
+where ccd_owner_id = '9';
+
+SELECT COUNT(ccd_owner_id) AS ignored_trans_10
+FROM ch_trans_low_amt
+where ccd_owner_id = '10';

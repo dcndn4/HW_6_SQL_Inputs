@@ -386,3 +386,9 @@ print(suspect_25_detail.dtypes)
 
 Susp_25 = px.box(suspect_25_detail, x = 'Month', y = 'amount')
 Susp_25.show()
+
+#%%
+
+#df_expensive_neighborhoods_per_year = df_costs_year_sorted[df_costs_year_sorted["Neighborhood"].isin(df_expensive_neighborhoods["neighborhood"])]
+
+suspect_25_detail_june = suspect_25_detail.isin(month_list)

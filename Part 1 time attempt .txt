@@ -1,0 +1,15 @@
+
+
+CREATE Table full_time_transactions AS
+SELECT transactions.trans_id, transactions.datetime, transactions.amount, transactions.cc_nbr, cc.ccd_owner_id
+FROM transactions 
+JOIN credit_cards AS cc
+  ON transactions.cc_nbr = cc.ccd_nbr;
+  
+SELECT * FROM full_time_transactions
+
+SELECT cast(datetime as time)
+from full_time_transactions;
+
+ERROR:  cannot cast type date to time without time zone
+LINE 1: SELECT cast(datetime as time)

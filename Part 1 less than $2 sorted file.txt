@@ -1,0 +1,29 @@
+DROP TABLE IF EXISTS ch_trans_low_amt CASCADE;
+DROP TABLE IF EXISTS ignored_quantity CASCADE;
+
+CREATE Table full_transactions AS
+SELECT transactions.trans_id, transactions.datetime, transactions.amount, transactions.cc_nbr, cc.ccd_owner_id
+FROM transactions 
+JOIN credit_cards AS cc
+  ON transactions.cc_nbr = cc.ccd_nbr;
+
+CREATE Table ch_trans_low_amt AS
+SELECT * from full_transactions
+where amount < 2.00
+order by ccd_owner_id;
+
+Create Table ignored_quantity (
+    ccd_owner_id integer NOT NULL,
+	ign_trans_qty varchar(2) NOT Null,
+    PRIMARY KEY (ccd_owner_id),
+    FOREIGN KEY (ccd_owner_id) REFERENCES card_holder(cc_holder_id) 
+);
+
+CREATE Table ignored_quantity AS
+SELECT
+	ccd_owner_id,
+	COUNT(*) AS number_ignored
+	FROM ch_trans_low_amt
+	Group by ccd_owner_id;
+
+SELECT * FROM ignored_quantity;

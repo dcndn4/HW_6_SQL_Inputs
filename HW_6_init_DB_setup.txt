@@ -1,0 +1,6 @@
+
+create table card_holder -- tablename
+	(
+	 cc_holder_id int not null -- column name then column datatype. no non-existant values allowed
+	, cc_holder_name varchar(30) -- length =< 30 chars
+	);
