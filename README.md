@@ -4,6 +4,8 @@ SQL HW 6 Inputs and other related materials
 # HW-6-SQL-Susp-Trns
 Homework 6 Unit 7 SQL Assnmnt_ Susp 
 
+This is my internal repo for this homework assignment. The repo submitted for grading is at: https://github.com/dcndn4/HW-6-SQL-Susp-Trns.git
+
 So my required items include:
 
 An image file of ERD
